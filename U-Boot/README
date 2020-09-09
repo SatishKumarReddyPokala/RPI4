@@ -1,19 +1,49 @@
-# Follow below steps to use U-Boot for RPI4.
+# These are the steps to port U-Boot for RPI4.
 
-U-Boot for Raspberrypi 4
+/******		U-Boot for Raspberrypi 4		********/
 
-Collecting source files.
-Download the source files from their repository.
+For Downloading of source files please refer paths given at the end of the file.
 
-https://github.com/u-boot/u-boot									//For U-Boot source code
-https://github.com/raspberrypi/firmware/tree/master/boot			//start4.elf, fixup4.dat, .dtb files
-https://archlinuxarm.org/packages/armv7h/uboot-raspberrypi			//boot.txt, boot.src, config.txt, mkscr
-https://archlinuxarm.org/packages/armv7h/uboot-raspberrypi/files	//boot.txt.v3, 0001-rip-increase-space-for-kernel.patch
+Folder structure is given for Beginners to understand U-Boot. We are assuming you are having the same folder structure as given below.
 
-Extract all the source files.
+|
+|
+----> U-Boot 
+	|
+	|
+	------> U-Boot-Master 
+	|		|
+	|		|
+	|		------> Licenses
+	|		------> api
+	|		------> arch
+	|		------> board
+	|		------> cmd
+	|		------> common
+	|		------> cofigs
+	|		------> disk
+	|			.
+	|			.
+	|			.
+	|			.
+	|			.
+	|			etc...
+	|
+	|
+	------> 0001-rip-increase-space-for-kernel.patch
+	------> bcm2711-rpi-4-b.dtb	(For other boards use appropriate .dtb)
+	------> start4.elf		(For other boards use appropriate startx.elf)
+	------> fixup4.dat		(For other boards use appropriate fixupx.dat)	//start and fixup should be same name files 
+	------> boot.txt.v3		(For 32 bit use boot.txt.v2)
 
-	patch -p1 -i ../0001-rip-increase-space-for-kernel.patch	//place the patch file outside of u-boot-master
-	cd u-boot-master
+Please install essential tools and CROSSCOMPILER tools for ARM
+for 32 bit build use arm-none-eabi-
+for 64 bit build use aarch64-linux-gnu-
+
+Navigate to U-Boot folder and start executing below commands on terminal
+
+	patch -p1 -i 0001-rip-increase-space-for-kernel.patch	//place the patch file outside of u-boot-master.
+	cd u-boot-master						//U-Boot source code folder.
 	
 	unset CFLAGS
 	unset CXXFLAGS
@@ -21,17 +51,27 @@ Extract all the source files.
 	
 	make distclean
 	
-	make CROSS_COMPILE=aarch64-linux-gnu- rpi_arm64_config
+	make CROSS_COMPILE=aarch64-linux-gnu- rpi_arm64_config		(use arm-none-eabi- for 32 bit)
 	echo 'CONFIG_IDENT_STRING=" Arch Linux ARM"' >> .config
-	make CROSS_COMPILE=aarch64-linux-gnu-
+	make CROSS_COMPILE=aarch64-linux-gnu-				(use arm-none-eabi- for 32 bit)
 	
 	mkdir boot/
-	cp u-boot.bin boot/kernel8.img
+	cp u-boot.bin boot/kernel8.img					(Kernel7.img for 32 bit)
 	cp ../*.dtb boot/
-	cp ../boot.txt.v3 boot/
+	cp ../boot.txt.v3 boot/						(use boot.txt.v2 for 32 bit)
 	
 	echo "enable_uart=1" > /boot/config.txt
 	
 	tools/mkimage -A arm -O linux -T script -C none -n "U-Boot boot script" -d ../boot.txt /boot/boot.scr
 	
 	cp ../{boot.txt,mkscr} /boot
+	
+	cp ../start4.elf /boot						(startX.elf for other boards)
+	cp ../fixup4.dat /boot						(fixupx.dat for other boards)
+
+
+#Source file paths to download
+
+https://github.com/u-boot/u-boot					//For U-Boot source code
+https://github.com/raspberrypi/firmware/tree/master/boot		//start4.elf, fixup4.dat, .dtb files
+https://archlinuxarm.org/packages/armv7h/uboot-raspberrypi/files	//boot.txt.v3, 0001-rip-increase-space-for-kernel.patch, mkscr
