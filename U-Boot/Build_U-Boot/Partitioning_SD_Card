@@ -1,0 +1,31 @@
+#setps to create partition in SD card
+
+01. Connect the SD card with a USB card reader.
+02. List out the disks connected to the PC with fdisk utility
+      sudo fdisk -l
+03. Find your SD card it looks like /dev/sda or /dev/sdb or /dev/sdc etc..
+04. Select the SD card
+      sudo fdisk /dev/sdX   (sdX ---> X is your partition a,b,c etc..)
+05. Enter the command "h" for help
+06. List the partitions available in the SD card with the command "p"
+07. Delete the partitions with the command "d"
+08. Create new partition with the command "n"
+09. Select new partition as a primary with the command "p"
+10. Select the no.of partitions 1 (click 'enter' button default selection is 1)
+11. Press the 'Enter' to set deault start and size values. (might be 2 times)
+12. Activate the partition with the command "a"
+13. Only one partition is created so enter "1"
+14. Set the boot partition file system type with the command "t"
+15. Select the prtition to add file system type "1" (Only one partition is available)
+16. Enter the command "l" to list the file systems types available.
+17. To create FAT32 partition select command "b"
+18. Write the information into the partition, enter command "w"
+19. Format the partition
+       mkfs.vfat -F 32 -n boot /dev/sdX1 (Please enter first partition sdX1 not sdX)
+20. mount the SD card to PC, it will list the /dev/sdX mounted path /media/xxxxx/boot (mounting is mapping the SD card address to PC)
+       mount
+21. copy the files startX.elf, fixupX.dat, config.txt etc..
+        cp PATH/startx.elf fixup.dat config.txt /media/xxxx/boot
+22. sync the data written to SD card with the command
+        umount /media/xxxxx/boot
+23. Eject SD card and inser it into Raspberry pi.
