@@ -72,7 +72,7 @@ Navigate to U-Boot folder and start executing below commands on terminal
 	cp ../fixup4.dat /boot						(fixupx.dat for other boards)
 
 Copy the files from /boot to SD card /boot partition.
-Refer this file to partition SD card(https://github.com/SatishKumarReddyPokala/RPI4/blob/master/U-Boot/Build_U-Boot/Partitioning_SD_Card)
+Refer this file to partition SD card	//https://github.com/SatishKumarReddyPokala/RPI4/blob/master/U-Boot/Build_U-Boot/Partitioning_SD_Card
 
 
 #Source file paths to download
