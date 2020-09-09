@@ -71,7 +71,7 @@ Navigate to U-Boot folder and start executing below commands on terminal
 	cp ../start4.elf /boot						(startX.elf for other boards)
 	cp ../fixup4.dat /boot						(fixupx.dat for other boards)
 
-Copy the files from /boot to SD card.
+Copy the files from /boot to SD card /boot partition.
 
 
 #Source file paths to download
