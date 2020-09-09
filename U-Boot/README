@@ -35,6 +35,7 @@ Folder structure is given for Beginners to understand U-Boot. We are assuming yo
 	------> start4.elf		(For other boards use appropriate startx.elf)
 	------> fixup4.dat		(For other boards use appropriate fixupx.dat)	//start and fixup should be same name files 
 	------> boot.txt.v3		(For 32 bit use boot.txt.v2)
+	------> mkscr
 
 Please install essential tools and CROSSCOMPILER tools for ARM
 for 32 bit build use arm-none-eabi-
@@ -68,6 +69,8 @@ Navigate to U-Boot folder and start executing below commands on terminal
 	
 	cp ../start4.elf /boot						(startX.elf for other boards)
 	cp ../fixup4.dat /boot						(fixupx.dat for other boards)
+
+Copy the files from /boot to SD card.
 
 
 #Source file paths to download
