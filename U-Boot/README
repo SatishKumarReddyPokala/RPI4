@@ -1,0 +1,37 @@
+# Follow below steps to use U-Boot for RPI4.
+
+U-Boot for Raspberrypi 4
+
+Collecting source files.
+Download the source files from their repository.
+
+https://github.com/u-boot/u-boot									//For U-Boot source code
+https://github.com/raspberrypi/firmware/tree/master/boot			//start4.elf, fixup4.dat, .dtb files
+https://archlinuxarm.org/packages/armv7h/uboot-raspberrypi			//boot.txt, boot.src, config.txt, mkscr
+https://archlinuxarm.org/packages/armv7h/uboot-raspberrypi/files	//boot.txt.v3, 0001-rip-increase-space-for-kernel.patch
+
+Extract all the source files.
+
+	patch -p1 -i ../0001-rip-increase-space-for-kernel.patch	//place the patch file outside of u-boot-master
+	cd u-boot-master
+	
+	unset CFLAGS
+	unset CXXFLAGS
+	unset CPPFLAGS
+	
+	make distclean
+	
+	make CROSS_COMPILE=aarch64-linux-gnu- rpi_arm64_config
+	echo 'CONFIG_IDENT_STRING=" Arch Linux ARM"' >> .config
+	make CROSS_COMPILE=aarch64-linux-gnu-
+	
+	mkdir boot/
+	cp u-boot.bin boot/kernel8.img
+	cp ../*.dtb boot/
+	cp ../boot.txt.v3 boot/
+	
+	echo "enable_uart=1" > /boot/config.txt
+	
+	tools/mkimage -A arm -O linux -T script -C none -n "U-Boot boot script" -d ../boot.txt /boot/boot.scr
+	
+	cp ../{boot.txt,mkscr} /boot
