@@ -36,6 +36,7 @@ Folder structure is given for Beginners to understand U-Boot. We are assuming yo
 	------> fixup4.dat		(For other boards use appropriate fixupx.dat)	//start and fixup should be same name files 
 	------> boot.txt.v3		(For 32 bit use boot.txt.v2)
 	------> mkscr
+	------> config.txt
 
 Please install essential tools and CROSSCOMPILER tools for ARM
 for 32 bit build use arm-none-eabi-
@@ -61,7 +62,7 @@ Navigate to U-Boot folder and start executing below commands on terminal
 	cp ../*.dtb boot/
 	cp ../boot.txt.v3 boot/						(use boot.txt.v2 for 32 bit)
 	
-	echo "enable_uart=1" > /boot/config.txt
+	cp ../config.txt boot/
 	
 	tools/mkimage -A arm -O linux -T script -C none -n "U-Boot boot script" -d ../boot.txt /boot/boot.scr
 	
