@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ ! -x /usr/bin/mkimage ]]; then
-  echo "mkimage not found. Please install uboot-tools:"
+  echo "mkimage not found. Please check for uboot-tools are installed if not install "
   echo "  pacman -S uboot-tools"
   exit 1
 fi
