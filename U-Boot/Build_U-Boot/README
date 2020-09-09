@@ -53,7 +53,7 @@ Navigate to U-Boot folder and start executing below commands on terminal
 	
 	make distclean
 	
-	make CROSS_COMPILE=aarch64-linux-gnu- rpi_arm64_config		(use arm-none-eabi- for 32 bit)
+	make CROSS_COMPILE=aarch64-linux-gnu- rpi_arm64_config		(use arm-none-eabi- rpi_2_config for 32 bit)
 	echo 'CONFIG_IDENT_STRING=" Arch Linux ARM"' >> .config
 	make CROSS_COMPILE=aarch64-linux-gnu-				(use arm-none-eabi- for 32 bit)
 	
