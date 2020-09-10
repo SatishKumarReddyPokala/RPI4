@@ -1,0 +1,23 @@
+Connecting USB to TTL connector to PC
+
+UART Tx and Rx pins are connected to the USB to TTL converter.
+
+
+ ---------------            ---------------              ---------------
+|               |          |               |            |               |
+|               |          |               |            |               |
+|               |          |               |            |               |
+|     RPI4      | -------> |    USB-TTL    | -------->  |       PC      |
+|               |          |               |            |               |
+|               |          |               |            |               |
+|               |          |               |            |               |
+ ---------------            ---------------              ---------------
+
+
+pin 01 is V3.3    (USB-TTL get power from PC)
+pin 02 is V5.0
+pin 06 is GND    ------->       GND
+pin 08 is Tx     ------->       Rx                ----->      USB
+pin 10 is Rx     ------->       Tx
+
+
