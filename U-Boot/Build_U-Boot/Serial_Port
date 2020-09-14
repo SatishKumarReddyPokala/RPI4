@@ -21,3 +21,9 @@ pin 08 is Tx     ------->       Rx                ----->      USB
 pin 10 is Rx     ------->       Tx
 
 
+Use putty or minicom to use serial communication.
+
+Baudrate  ->  115200
+
+For windows serial connection is COMx
+For linux (Ubuntu) serial connection is /dev/ttyUSBx
